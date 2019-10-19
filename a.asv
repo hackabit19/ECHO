@@ -2,8 +2,9 @@ clear all
 close all
 clc
 %% Taking audio input and lowpass filtering 
-[y, fs] = audioread('hand.mp3');
+[y, fs] = audioread('filename.wav');
 y = y(:,1);
+y=y(:);
 convfs = 22050;         %Chosen value of sample rate to make sample rate constant
 y1 = fir1(501,1/3);
 y = filter(y1,1,y);
@@ -25,10 +26,6 @@ scope = dsp.TimeScope('NumInputPorts',4,  ...
      'Title',"Audio Signal", ...
      'ChannelNames',{'Original Audio','Energy','Detection of voice','Corrected Audio'});
      
-%% Zero Crossing 
-%zci = @(v) find(v(:).*circshift(v(:),[1 0]) <=0);
-%zx = zci(y);
-
 %% Buffer the file into 20-30 ms bits
 frameLength = 512;
 z = buffer(x,frameLength);
@@ -40,10 +37,12 @@ energy = repelem(energy,frameLength);
 h = ones(1,2000);
 energy = filter(h,1,energy);
 energy = energy/max(energy);
-E = energy > 0.09;
+energy = energy(:)';
+E = energy > 0.08;
 
 %% To find start and end of words
 difference = diff(E);
+difference = difference(1:length)
 time = 1:length(x);
 wr = difference(1:length(x)).*time;
 wr = abs(wr);
@@ -74,7 +73,7 @@ for n = 1:(length(ends)-1)
     w1 = reshape(w1,1,s1(3)*13);
     w2 = reshape(w2,1,s2(3)*13);
     dist = sqrt(sum(((w1(1:min(s1(3),s2(3)))-w2(1:min(s1(3),s2(3))))./(w1(1:min(s1(3),s2(3)))+w2(1:min(s1(3),s2(3))))).^2,2));
-    if (dist<5.5) 
+    if (dist<5.1) 
         start(n) = 0;
         ends(n) =0;
     end    
@@ -91,8 +90,8 @@ gap = start(2:end) - ends(1:end-1);
 gap = gap>0.15*convfs;
 for n = 1:length(gap)
     if(gap)
-        start(n) = start(n) - round(0.15*convfs);
-        ends(n) = ends(n) + round(0.15*convfs);
+        start(n) = start(n) - round(0.18*convfs);
+        ends(n) = ends(n) + round(0.18*convfs);
     end
 end
 corrected = [];
@@ -101,4 +100,4 @@ for n = 1:length(ends)
 end
 corrected = corrected';
 scope(x,energy',E',corrected)
-sound(corrected, convfs)
+audiowrite('final.wav',corrected,convfs);

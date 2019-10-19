@@ -25,10 +25,6 @@ scope = dsp.TimeScope('NumInputPorts',4,  ...
      'Title',"Audio Signal", ...
      'ChannelNames',{'Original Audio','Energy','Detection of voice','Corrected Audio'});
      
-%% Zero Crossing 
-%zci = @(v) find(v(:).*circshift(v(:),[1 0]) <=0);
-%zx = zci(y);
-
 %% Buffer the file into 20-30 ms bits
 frameLength = 512;
 z = buffer(x,frameLength);
@@ -101,3 +97,4 @@ for n = 1:length(ends)
 end
 corrected = corrected';
 scope(x,energy',E',corrected)
+audiowrite('filename.wav',corrected,convfs);
