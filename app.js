@@ -9,14 +9,9 @@ app.use(express.static(__dirname + '/'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', function (req, res, next) {
-    console.log("in the search page page");
-    res.sendFile(path.join(__dirname, 'view', 'index.html'));
-});
 
-
-app.use(function (req, res, next) {
-    console.log("in the recconising  page");
+app.get('/givejson', function (req, res, next) {
+    console.log("in the reconising  page");
     "use strict";
     var subscriptionKey = "95bda8b9567247e69b5eae5b1a133cc5";
     var serviceRegion = "westus"; // e.g., "westus"
@@ -36,9 +31,9 @@ app.use(function (req, res, next) {
     recognizer.recognizeOnceAsync(
         function (result) {
             console.log(result);
-            res.json(result);
             recognizer.close();
             recognizer = undefined;
+            return res.json(result);
         },
         function (err) {
             console.trace("err - " + err);
@@ -47,8 +42,13 @@ app.use(function (req, res, next) {
             recognizer = undefined;
         });
 
-
+  
 });
 
+
+app.use('/', function (req, res, next) {
+    console.log("in the search page page");
+    res.sendFile(path.join(__dirname, 'view', 'index.html'));
+});
 
 app.listen(3600);
