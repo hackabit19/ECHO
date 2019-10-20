@@ -78,7 +78,7 @@ for n = 1:(length(ends)-1)
     w1 = reshape(w1,1,s1(3)*13);
     w2 = reshape(w2,1,s2(3)*13);
     dist = sqrt(sum(((w1(1:min(s1(3),s2(3)))-w2(1:min(s1(3),s2(3))))./(w1(1:min(s1(3),s2(3)))+w2(1:min(s1(3),s2(3))))).^2,2));
-    if (dist<5.1) 
+    if (dist<6) 
         start(n) = 0;
         ends(n) =0;
     end    

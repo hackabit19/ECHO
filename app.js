@@ -15,7 +15,7 @@ app.get('/givejson', function (req, res, next) {
     "use strict";
     var subscriptionKey = "95bda8b9567247e69b5eae5b1a133cc5";
     var serviceRegion = "westus"; // e.g., "westus"
-    var filename = "filename.wav"; // 16000 Hz, Mono
+    var filename = "finalAudio.wav"; // 16000 Hz, Mono
     var pushStream = sdk.AudioInputStream.createPushStream();
     fs.createReadStream(filename).on('data', function (arrayBuffer) {
         pushStream.write(arrayBuffer.slice());
