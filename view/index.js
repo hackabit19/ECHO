@@ -409,7 +409,7 @@ function getans() {
         success: function (res) {
             console.log(res.privText);
             var x=res.privText;
-            $("#term").val(x);
+            $("#term").val(x); 
 
         },
 
