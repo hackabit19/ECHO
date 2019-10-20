@@ -2,7 +2,15 @@ clear all
 close all
 clc
 %% Taking audio input and lowpass filtering 
-[y, fs] = audioread('hand.mp3');
+[file,path] = uigetfile({'*.mp3';'*.wav'});
+if isequal(file,0)
+   disp('User selected Cancel');
+else
+   disp(['User selected ', fullfile(path,file)]);
+end
+selectedfile = fullfile(path,file);
+[y,fs] = audioread(selectedfile);
+%[y, fs] = audioread('hand.mp3');
 y = y(:,1);
 convfs = 22050;         %Chosen value of sample rate to make sample rate constant
 y1 = fir1(501,1/3);
@@ -97,4 +105,5 @@ for n = 1:length(ends)
 end
 corrected = corrected';
 scope(x,energy',E',corrected)
-audiowrite('filename.wav',corrected,convfs);
+sound(corrected,convfs)
+audiowrite('finalAudio.wav',corrected,convfs);

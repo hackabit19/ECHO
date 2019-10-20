@@ -1,6 +1,6 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="2495881542" file="E:\ECHO\recapp.prj" location="E:\ECHO" name="recapp" target="target.mlapps" target-name="Package App">
-    <param.appname>recapp</param.appname>
+  <configuration build-checksum="3389996257" file="D:\ECHO\StutterRemoval.prj" location="D:\ECHO" name="StutterRemoval" target="target.mlapps" target-name="Package App">
+    <param.appname>StutterRemoval</param.appname>
     <param.authnamewatermark />
     <param.email />
     <param.company />
@@ -8,14 +8,14 @@
     <param.icons />
     <param.summary />
     <param.description />
-    <param.screenshot />
+    <param.screenshot>C:\Users\Lenovo\AppData\Local\Temp\tp93ed1275_826a_404a_b95e_fc18d9482904.png</param.screenshot>
     <param.version>1.0</param.version>
     <param.products.name />
     <param.products.id />
     <param.products.version />
     <param.platforms />
-    <param.output>${PROJECT_ROOT}</param.output>
-    <param.guid>588b6f7b-0bb7-40cb-8e9c-da547ea018c4</param.guid>
+    <param.output>D:\ECHO</param.output>
+    <param.guid>000dff69-25a7-45a0-87e7-f4283822b7a4</param.guid>
     <unset>
       <param.authnamewatermark />
       <param.email />
@@ -24,7 +24,6 @@
       <param.icons />
       <param.summary />
       <param.description />
-      <param.screenshot />
       <param.version />
       <param.products.name />
       <param.products.id />
@@ -33,27 +32,54 @@
       <param.output />
     </unset>
     <fileset.main>
-      <file>${PROJECT_ROOT}\recapp.mlapp</file>
-    </fileset.main>
-    <fileset.depfun>
-      <file>${MATLAB_ROOT}\examples\deeplearning_shared\stop.jpg</file>
       <file>${PROJECT_ROOT}\record.mlapp</file>
-    </fileset.depfun>
+    </fileset.main>
+    <fileset.depfun />
     <fileset.resources />
     <fileset.package />
     <build-deliverables>
-      <file location="E:\" name="ECHO" optional="false">E:\ECHO</file>
+      <file location="D:\" name="ECHO" optional="false">D:\ECHO</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2019b</root>
+      <root>C:\Program Files\MATLAB\R2018a</root>
       <toolboxes>
+        <toolbox name="fixedpoint" />
         <toolbox name="matlabcoder" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="gpucoder" />
+        <toolbox name="polyspacebugfinder" />
       </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
       <toolbox>
         <matlabcoder>
           <enabled>true</enabled>
         </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <gpucoder>
+          <enabled>true</enabled>
+        </gpucoder>
+      </toolbox>
+      <toolbox>
+        <polyspacebugfinder>
+          <enabled>true</enabled>
+        </polyspacebugfinder>
       </toolbox>
     </matlab>
     <platform>
